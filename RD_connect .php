@@ -34,20 +34,12 @@ function RD_Getdata($SEARCH){
 
 // $ADD="INSERT INTO label (A,B) VALUES "('{$A}','{$B}')";
 
-function RD_Savedata($ADD){
-    $DO_ADD=mysqli_query($this->CONNECT,$ADD);
-}
-
 // $EDIT="UPDATE label SET A='{$A}' WHERE X='{$X}'";
-
-function RD_Editdata($EDIT){
-    $DO_EDIT=mysqli_query($this->CONNECT,$EDIT);
-}
 
 // $DELETE="DELETE FROM A WHERE X='{$X}'"";
 
-function RD_Deletedata($DELETE){
-    $DO_DELETE=mysqli_query($this->CONNECT,$DELETE);
+function RD_RUN($RUN){
+    $DO_RUN=mysqli_query($this->CONNECT,$RUN);
 }
 
 // count the all nums of a table
