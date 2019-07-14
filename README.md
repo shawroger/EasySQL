@@ -1,2 +1,8 @@
 # RD_connect
-An easy php->mysql connecting tools with only one file.
+一个简单的PHP封装库，只需要一个文件就可以快速连接数据库。
+
+#如何使用？
+很简单，下载后 放置在你需要的目录就可以。
+然后用：
+include "$ADDRESS/RD_connect.php"; 即可引用。
+即使你修改这个文件名也没有影响，只需要在引用的时候也改成一样即可。
