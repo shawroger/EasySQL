@@ -98,7 +98,7 @@ $TSET->RD_RUN()($sql);
 利用 **RD_connect.php** 我们可以很简短地写出代码：
 
 ```PHP
-include "connect.php";
+include "RD_connect.php"; //引入文件
 
 $TABLE = 'table02';  //设置数据表名
 
