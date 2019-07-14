@@ -33,6 +33,24 @@ $TEST = new RD(参数1;参数2;参数3;参数4);
 
 ## 2.获取数据信息
 
+在此之前，我们先预设数据表名
 
+```PHP
+const TABLE = 数据表名;
+```
 
+* (1) 获取数据表长度
 
+调用RD_Strlen()方法，可以直接获得目标数据表的长度。
+
+```PHP
+$length = $TEST->RD_Strlen(TABLE);
+```
+
+* (2)获取指定条件的数据
+
+假设我们想要获得目标name="Roger"的数据其他的信息(如age等)我们可以先指定一个mysql语句：
+
+```Mysql
+$sql = "SELECT * FROM {TABLE} WHERE name='Roger'";
+```
