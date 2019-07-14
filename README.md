@@ -39,7 +39,7 @@ $TEST = new RD(参数1;参数2;参数3;参数4);
 const TABLE = 数据表名;
 ```
 
-* (1) 获取数据表长度
+## * (1) 获取数据表长度
 
 调用 **RD_Strlen()** 方法，可以直接获得目标数据表的长度。
 
@@ -47,7 +47,7 @@ const TABLE = 数据表名;
 $length = $TEST->RD_Strlen(TABLE);
 ```
 
-* (2)获取指定条件的数据
+## * (2)获取指定条件的数据
 
 假设我们想要获得目标 **name="Roger"** 的数据其他的信息(如age等)我们可以先指定一个mysql语句：
 
@@ -67,8 +67,26 @@ $TSET->RD_Getdata($sql);
 echo $TSET->GET_SEARCH['age'];
 ```
 
-* (3)增加、修改、删除指定数据
+## * (3)增加、修改、删除指定数据
 
-三种目的对应三个方法 **$GET_SEARCH[]** 、 **$GET_SEARCH[]** 和 **$GET_SEARCH[]** 。
+三种目的对应同一个方法 **RD_RUN()**。
 
 都是需要一条SQL语句，然后调用方法完成操作。
+
+```SQL
+$sql = "INSERT INTO {TABLE} (name,age) VALUES 'Mark',18";  (增加数据)
+```
+
+```SQL
+$sql = "UPDATE {TABLE} SET age=XXX WHERE name='Roger'";  (修改数据)
+```
+
+```SQL
+$sql = "DELETE FROM {TABLE} WHERE name='Roger'";  (删除数据)
+```
+
+然后均执行**RD_RUN()** 方法即可：
+
+```PHP
+$TSET->RD_RUN()($sql);
+```
