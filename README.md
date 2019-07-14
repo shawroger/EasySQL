@@ -99,12 +99,22 @@ $TSET->RD_RUN()($sql);
 
 ```PHP
 include "connect.php";
+
 $TABLE = 'table02';  //设置数据表名
+
 $conn = new RD('HOST','USER','PASSWORD','year2019'); //连接数据库
+
 $length = $conn->RD_Strlen($TABLE);  //获取长度
-for($i = 1; $i <= $length; $i++){
+
+for($i = 1; $i <= $length; $i++) {
+
     $get = "SELECT * FROM {$TABLE} WHERE id={$i}";  //依次请求sql语句
+    
     $conn->RD_Getdata($get);  //获取数据
+    
     echo $conn->GET_SEARCH['school'];  //输出数据
+    
 }
 ```
+
+# 感谢
