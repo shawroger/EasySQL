@@ -54,3 +54,15 @@ $length = $TEST->RD_Strlen(TABLE);
 ```Mysql
 $sql = "SELECT * FROM {TABLE} WHERE name='Roger'";
 ```
+
+然后可以调用RD_Getdata()方法：
+
+```PHP
+$TSET->RD_Getdata($sql);
+```
+
+然后就可以直接使用$GET_SEARCH[]数组获得数据：
+
+```PHP
+echo $TSET->GET_SEARCH['age'];
+```
