@@ -17,7 +17,7 @@ include "$ADDRESS/RD_connect.php";
 
 ## 1.申请一个RD类的对象
 ```PHP
-$TEST = new RD(参数1;参数2;参数3;参数4;参数5);
+$TEST = new RD_connect(参数1;参数2;参数3;参数4;参数5);
 ```
 其中：
 
