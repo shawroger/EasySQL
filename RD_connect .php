@@ -1,6 +1,6 @@
 <?php
 header("Content-type:text/html;charset=utf-8");
-class RD
+class RD_connect
 {
     var $HOST;
     var $USER;
