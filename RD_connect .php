@@ -1,6 +1,6 @@
 <?php
 header("Content-type:text/html;charset=utf-8");
-class RD_connect
+class RD
 {
     var $HOST;
     var $USER;
@@ -19,43 +19,33 @@ function __construct($HOST,$USER,$PASS,$BASE,$TABLE){
     $this->CONNECT=$CONNECT;
     mysqli_select_db($this->CONNECT,$BASE);
     $this->RD_Col();
+    $this->RD_For();
 }
-
 /* 
 $ADD="INSERT INTO label (A,B) VALUES "('{$A}','{$B}')";
 $EDIT="UPDATE label SET A='{$A}' WHERE X='{$X}'";
 $DELETE="DELETE FROM A WHERE X='{$X}'"";
 */
-
-
 function RD_Run($RUN){
     $DO_RUN=mysqli_query($this->CONNECT,$RUN);
 }
-
 // $SEARCH="SELECT * FROM XX WHERE YY='{$YY}'";
-
 function RD_Get($SEARCH){
     $DO_SEARCH=mysqli_query($this->CONNECT,$SEARCH);
     $GET_SEARCH=mysqli_fetch_array($DO_SEARCH, MYSQLI_ASSOC);
     $this->RD_GET=$GET_SEARCH;
 }
-
 function RD_Eget($E_Q,$E_A){
     $E_SEARCH="SELECT * FROM {$this->TABLE} WHERE {$E_Q} = {$E_A}";
     $this->RD_Get($E_SEARCH);
 }
-
-
 // return an array 
-
 function RD_Arr($DO_ARR){
     $DO_DO_ARR=mysqli_query($this->CONNECT,$DO_ARR);
     $GET_DO_DO_ARR=mysqli_fetch_array($DO_DO_ARR, MYSQLI_ASSOC);
     return $GET_DO_DO_ARR;
 }
-
 // count the all nums of a table
-
 function RD_Strlen($Another_TABLE){
     if($Another_TABLE==''){
         $Another_TABLE=$this->TABLE;
@@ -69,9 +59,25 @@ function RD_Strlen($Another_TABLE){
     }
     return $DO_STRLEN_id;
 }
+    
+// get data foreach
+function RD_For($Another_TABLE){
+    if($Another_TABLE==''){
+        $Another_TABLE=$this->TABLE;
+    }
+    $FUNC_FOR="SELECT * FROM {$Another_TABLE}";
+    $DO_FUNC_FOR=mysqli_query($this->CONNECT,$FUNC_FOR);
+    $FOR_ROW=0;
+    
+    while($GET_FUNC_FOR=mysqli_fetch_row($DO_FUNC_FOR)){
+        for($FOR_COL=0;$FOR_COL<$this->RD_Col;$FOR_COL++){
+            $this->RD_FOR[$FOR_ROW][$FOR_COL]=$GET_FUNC_FOR[$FOR_COL];
+        }
+        $FOR_ROW++;
+    }
+}
 
-// get the name of a table
-
+// get each name of the table
 function RD_Col() {
     if($Another_TABLE=='') {
         $Another_TABLE=$this->TABLE;
@@ -86,6 +92,5 @@ function RD_Col() {
     $this->RD_COL=$GET_ALLC;
     $this->RD_Col=$ALLC_id;
 }
-
 }
 ?>
