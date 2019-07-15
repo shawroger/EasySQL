@@ -88,7 +88,7 @@ $sql = "DELETE FROM {$TABLE} WHERE name='Roger'";  (删除数据)
 然后均执行**RD_RUN()** 方法即可：
 
 ```PHP
-$TSET->RD_RUN()($sql);
+$TSET->RD_RUN($sql);
 ```
 
 # 案例
