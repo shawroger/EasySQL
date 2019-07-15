@@ -84,7 +84,7 @@ function RD_Col() {
         $ALLC_id++;
     }
     $this->RD_COL=$GET_ALLC;
-    $this->RD_Col=$ALLC_id;=$ALLC_id;
+    $this->RD_Col=$ALLC_id;
 }
 
 }
