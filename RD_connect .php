@@ -63,7 +63,6 @@ function RD_Strlen($Another_TABLE){
     {
         $DO_STRLEN_id++;
     }
-    $this->RD_Strlen=$DO_STRLEN_id;
     return $DO_STRLEN_id;
 }
     
