@@ -17,7 +17,7 @@ include "$ADDRESS/RD_connect.php";
 
 ## 1.申请一个RD类的对象
 ```PHP
-$TEST = new RD(参数1;参数2;参数3;参数4);
+$TEST = new RD(参数1;参数2;参数3;参数4;参数5);
 ```
 其中：
 
@@ -29,22 +29,26 @@ $TEST = new RD(参数1;参数2;参数3;参数4);
 
 * 参数4：你的数据库名
 
-如果一切正确，你已经直接连接到了数据库，且成功设置了UTF-8语言格式。
+* 参数5：你的数据表名
+
+如果一切正确，你已经直接连接到了数据库及其数据表，且成功设置了UTF-8语言格式。
 
 ## 2.获取数据信息
-
-在此之前，我们先预设数据表名
-
-```PHP
-$TABLE = 数据表名;
-```
 
 ### * (1) 获取数据表长度
 
 调用 **RD_Strlen()** 方法，可以直接获得目标数据表的长度。
 
 ```PHP
-$length = $TEST->RD_Strlen($TABLE);
+$length = $TEST->RD_Strlen();
+```
+
+这里默认是查询已经连接的数据表。
+
+如果你还想查询同一个数据库内的别的数据表的长度，你也可以直接加入参数：
+
+```PHP
+$length = $TEST->RD_Strlen($AnotherTableName);
 ```
 
 ### * (2)获取指定条件的数据
@@ -52,24 +56,24 @@ $length = $TEST->RD_Strlen($TABLE);
 假设我们想要获得目标 **name="Roger"** 的数据其他的信息(如age等)我们可以先指定一个mysql语句：
 
 ```SQL
-$sql = "SELECT * FROM {$TABLE} WHERE name='Roger'";
+$sql = "SELECT * FROM {$TEST->TABLE} WHERE name='Roger'";
 ```
 
 然后可以调用 **RD_Getdata()** 方法：
 
 ```PHP
-$TSET->RD_Getdata($sql);
+$TSET->RD_Get($sql);
 ```
 
-然后就可以直接使用 **$GET_SEARCH[]** 数组获得数据：
+然后就可以直接使用 **$RD_GET[]** 数组获得数据：
 
 ```PHP
-echo $TSET->GET_SEARCH['age'];
+echo $TSET->RD_GET['age'];
 ```
 
 ### * (3)增加、修改、删除指定数据
 
-三种目的对应同一个方法 **RD_RUN()**。
+三种目的对应同一个方法 **RD_Run()**。
 
 都是需要一条SQL语句，然后调用方法完成操作。
 
@@ -85,11 +89,15 @@ $sql = "UPDATE {$TABLE} SET age=XXX WHERE name='Roger'";  (修改数据)
 $sql = "DELETE FROM {$TABLE} WHERE name='Roger'";  (删除数据)
 ```
 
-然后均执行**RD_RUN()** 方法即可：
+然后均执行**RD_Run()** 方法即可：
 
 ```PHP
-$TSET->RD_RUN($sql);
+$TSET->RD_Run($sql);
 ```
+
+### * (4)直接查询数据表内的字段
+
+对于一个未知的数据表，我们可以直接检索其所有的字段名和其数量。
 
 # 案例
 
