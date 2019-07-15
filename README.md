@@ -106,7 +106,7 @@ $TSET->RD_Run($sql);
 通过该方法的参数，我们提供了一个参数和数组：
 
 ```PHP
-echo $TSET->COL;  //输出字段数 (从0开始)
+echo $TSET->RD_Col;  //输出字段数 (从0开始)
 ```
 
 ```PHP
