@@ -37,7 +37,7 @@ $TEST = new EasySQL(参数1;参数2;参数3;参数4;参数5);
 
 ### (1) 获取数据表长度
 
-调用 **RD_size()** 方法，可以直接获得目标数据表的长度。
+调用 **size()** 方法，可以直接获得目标数据表的长度。
 
 ```PHP
 $length = $TEST->size();
@@ -48,7 +48,7 @@ $length = $TEST->size();
 如果你还想查询同一个数据库内的别的数据表的长度，你也可以直接加入参数：
 
 ```PHP
-$length = $TEST->RD_Strlen($AnotherTableName);
+$length = $TEST->size($AnotherTableName);
 ```
 
 而对于已经连接的数据表，可以这样直接获得数据长度：
