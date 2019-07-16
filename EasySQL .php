@@ -1,6 +1,6 @@
 <?php
 header("Content-type:text/html;charset=utf-8");
-class RD_connect
+class EasySQL
 {
     public $HOST;
     public $USER;
