@@ -1,13 +1,13 @@
-RD_connect 使用说明
+EasySQL 使用说明
 =====
-一个简单的PHP封装库，只需要一个文件就可以快速连接数据库数据表。
+EasySQL是一个一个简单的PHP封装库，只需要一个文件就可以快速连接数据库数据表。
 
 # 如何使用？
 很简单，下载后 放置在你需要的目录就可以。
 
 然后在你需要使用的PHP文件中载入，就像这样：
 ```PHP
-include "$ADDRESS/RD_connect.php"; 
+include "$ADDRESS/EasySQL.php"; 
 ```
 即可引用。
 
@@ -17,7 +17,7 @@ include "$ADDRESS/RD_connect.php";
 
 ## 1.申请一个RD类的对象
 ```PHP
-$TEST = new RD_connect(参数1;参数2;参数3;参数4;参数5);
+$TEST = new EasySQL(参数1;参数2;参数3;参数4;参数5);
 ```
 其中：
 
@@ -149,12 +149,12 @@ echo $TEST->CROSS[m][n];  //输出表中坐标(m,n)的数据
 
 ### 1.假设我们在数据库year2019、数据表table02，有学生的姓名和学校数据：
 
-利用 **RD_connect.php** 我们可以很简短地写出代码：
+利用 **EasySQL.php** 我们可以很简短地写出代码：
 
 ```PHP
-include "RD_connect.php"; //引入文件
+include "EasySQL.php"; //引入文件
 
-$conn = new RD_connect('HOST','USER','PASSWORD','year2019','table02'); //连接数据库
+$conn = new EasySQL('HOST','USER','PASSWORD','year2019','table02'); //连接数据库
 
 for($t=0;$t<$conn->length;$t++) {
 
