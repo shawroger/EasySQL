@@ -1,5 +1,7 @@
 <?php
+
 header("Content-type:text/html;charset=utf-8");
+
 class EasySQL
 {
     public $HOST;
@@ -23,37 +25,26 @@ function __construct($HOST,$USER,$PASS,$BASE,$TABLE){
     $this->cross();
 }
 
-/* 
-$ADD="INSERT INTO label (A,B) VALUES "('{$A}','{$B}')";
-$EDIT="UPDATE label SET A='{$A}' WHERE X='{$X}'";
-$DELETE="DELETE FROM A WHERE X='{$X}'"";
-*/
-
 function run($RUN){
     $DO_RUN=mysqli_query($this->CONNECT,$RUN);
 }
-
-// $SEARCH="SELECT * FROM XX WHERE YY='{$YY}'";
 
 function get($SEARCH){
     $DO_SEARCH=mysqli_query($this->CONNECT,$SEARCH);
     $GET_SEARCH=mysqli_fetch_array($DO_SEARCH, MYSQLI_ASSOC);
     $this->GET=$GET_SEARCH;
 }
+    
 function eget($E_Q,$E_A){
     $E_SEARCH="SELECT * FROM {$this->TABLE} WHERE {$E_Q} = {$E_A}";
     $this->get($E_SEARCH);
 }
-
-// return an array 
 
 function arr($DO_ARR){
     $DO_DO_ARR=mysqli_query($this->CONNECT,$DO_ARR);
     $GET_DO_DO_ARR=mysqli_fetch_array($DO_DO_ARR, MYSQLI_ASSOC);
     return $GET_DO_DO_ARR;
 }
-
-// count the all nums of a table
 
 function size($Another_TABLE){
     if($Another_TABLE==''){
@@ -70,8 +61,6 @@ function size($Another_TABLE){
     return $DO_STRLEN_id;
 }
 
-// get data foreach
-
 function cross($Another_TABLE){
     if($Another_TABLE==''){
         $Another_TABLE=$this->TABLE;
@@ -86,10 +75,8 @@ function cross($Another_TABLE){
         $FOR_ROW++;
     }
 }
-
-// get each name of the table
-
-function col() {
+    
+function col($Another_TABLE) {
     if($Another_TABLE=='') {
         $Another_TABLE=$this->TABLE;
     }
@@ -102,6 +89,7 @@ function col() {
     }
     $this->COL=$GET_ALLC;
     $this->width=$ALLC_id;
+  }
 }
-}
+
 ?>
