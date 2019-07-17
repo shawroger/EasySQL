@@ -135,13 +135,13 @@ function seek($SEARCH){
             }
         }
     }
-$seek=$fetch[$fetch_avail[$fetch_avail_id]];
-for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++){
-    $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
-}
-$seek=array_values($seek);
-$this->seek=$seek;
-$this->seeker=count($seek);
+    $seek=$fetch[$fetch_avail[$fetch_avail_id]];
+    for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++) {
+        $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
+    }
+    $seek=array_values($seek);
+    $this->seek=$seek;
+    $this->seeker=count($seek);
 }
 
 
