@@ -100,7 +100,7 @@ function edit($line,$editArr) {
     $new_editArr=array();
     for($edit_temp=0;$edit_temp<$this->width;$edit_temp++){
         if($editArr[$edit_temp]==''){
-            $new_editArr[$edit_temp]=$this->CORSS[$line][$edit_temp];
+            $new_editArr[$edit_temp]=$this->CROSS[$line][$edit_temp];
         }
         else {
             $new_editArr[$edit_temp]=$editArr[$edit_temp];
