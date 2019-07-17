@@ -7,6 +7,8 @@ class EasySQL
     public $PASS;
     public $CONNECT;
     public $TABLE;
+    public $LINE;
+    public $ROW;
    
 function __construct($HOST,$USER,$PASS,$BASE,$TABLE){
     $this->HOST=$HOST;
@@ -21,6 +23,14 @@ function __construct($HOST,$USER,$PASS,$BASE,$TABLE){
     $this->size();
     $this->col();
     $this->cross();
+    for($LINE_temp=0;$LINE_temp<$this->length;$LINE_temp++){
+        $LINE[$LINE_temp]=$LINE_temp;
+    }
+    for($ROW_temp=0;$ROW_temp<$this->width;$ROW_temp++){
+        $ROW[$ROW_temp]=$ROW_temp;
+    }
+    $this->LINE=$LINE;
+    $this->ROW=$ROW;
 }
 
 function run($RUN){
@@ -134,15 +144,20 @@ function seek($SEARCH){
             }
         }
     }
-    $seek=$fetch[$fetch_avail[$fetch_avail_id]];
-    for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++) {
-        $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
-    }
-    $seek=array_values($seek);
-    $this->seek=$seek;
-    $this->seeker=count($seek);
+$seek=$fetch[$fetch_avail[$fetch_avail_id]];
+for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++){
+    $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
 }
-
+$seek=array_values($seek);
+$this->seek=$seek;
+$this->seeker=count($seek);
+if($fetch_avail_id==-1){
+$this->seek=$this->LINE;
+$this->seeker=count($this->seek);
+}
+echo $fetch_avail_id;
+print_r($this->seek);
+}
 
 }//end class
 ?>
