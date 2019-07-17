@@ -130,7 +130,6 @@ function seek($SEARCH){
             for($inTable=0;$inTable<$this->length;$inTable++){
                 if($this->CROSS[$inTable][$inSEARCH]==$SEARCH[$inSEARCH]){
                     $fetch[$inSEARCH][$fetch_id++]=$inTable;
-                echo "(".$inSEARCH.",".$inTable.")\r\n";
                 }
             }
         }
