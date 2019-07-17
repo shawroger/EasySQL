@@ -155,8 +155,6 @@ if($fetch_avail_id==-1){
 $this->seek=$this->LINE;
 $this->seeker=count($this->seek);
 }
-echo $fetch_avail_id;
-print_r($this->seek);
 }
 
 }//end class
