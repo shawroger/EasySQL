@@ -1,7 +1,5 @@
 <?php
-
 header("Content-type:text/html;charset=utf-8");
-
 class EasySQL
 {
     public $HOST;
@@ -38,12 +36,6 @@ function get($SEARCH){
 function eget($E_Q,$E_A){
     $E_SEARCH="SELECT * FROM {$this->TABLE} WHERE {$E_Q} = {$E_A}";
     $this->get($E_SEARCH);
-}
-
-function arr($DO_ARR){
-    $DO_DO_ARR=mysqli_query($this->CONNECT,$DO_ARR);
-    $GET_DO_DO_ARR=mysqli_fetch_array($DO_DO_ARR, MYSQLI_ASSOC);
-    return $GET_DO_DO_ARR;
 }
 
 function size($Another_TABLE){
@@ -90,6 +82,40 @@ function col($Another_TABLE) {
     $this->COL=$GET_ALLC;
     $this->width=$ALLC_id;
   }
+
+function add($addArr) {
+$add_first="INSERT INTO {$this->TABLE}".
+            "({$this->COL[0]})".
+            "VALUES ".
+            "('{$addArr[0]}')";
+$this->run($add_first);
+for($addtemp=1;$addtemp<$this->width;$addtemp++){
+        $add_more="UPDATE {$this->TABLE} SET {$this->COL[$addtemp]}='{$addArr[$addtemp]}' WHERE {$this->COL[0]}='{$addArr[0]}'";
+        $this->run($add_more);
+    }
 }
 
+function edit($line,$editArr) {
+    $hook_edit=$this->CROSS[$line][0];
+    $new_editArr=array();
+    for($edit_temp=0;$edit_temp<$this->width;$edit_temp++){
+        if($editArr[$edit_temp]==''){
+            $new_editArr[$edit_temp]=$this->CORSS[$line][$edit_temp];
+        }
+        else {
+            $new_editArr[$edit_temp]=$editArr[$edit_temp];
+        }
+    }
+    for($edit_run_temp=0;$edit_run_temp<$this->width;$edit_run_temp++){
+        $edit_more="UPDATE {$this->TABLE} SET {$this->COL[$edit_run_temp]}='{$new_editArr[$edit_run_temp]}' WHERE {$this->COL[0]}='{$hook_edit}'";
+        $this->run($edit_more);
+    }
+}
+
+function delete($line) {
+$delete="DELETE FROM {$this->TABLE} WHERE {$this->COL[0]}='{$this->CROSS[$line][0]}'";
+$this->run($delete);
+}
+
+}//end class
 ?>
