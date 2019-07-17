@@ -99,13 +99,14 @@ function edit($line,$editArr) {
     $hook_edit=$this->CROSS[$line][0];
     $new_editArr=array();
     for($edit_temp=0;$edit_temp<$this->width;$edit_temp++){
-        if($editArr[$edit_temp]==''){
-            $new_editArr[$edit_temp]=$this->CROSS[$line][$edit_temp];
+        if($editArr[$edit_temp]==""){
+                $new_editArr[$edit_temp]=$this->CROSS[$line][$edit_temp];
         }
         else {
             $new_editArr[$edit_temp]=$editArr[$edit_temp];
         }
     }
+    print_r($new_editArr);
     for($edit_run_temp=0;$edit_run_temp<$this->width;$edit_run_temp++){
         $edit_more="UPDATE {$this->TABLE} SET {$this->COL[$edit_run_temp]}='{$new_editArr[$edit_run_temp]}' WHERE {$this->COL[0]}='{$hook_edit}'";
         $this->run($edit_more);
@@ -116,6 +117,33 @@ function delete($line) {
 $delete="DELETE FROM {$this->TABLE} WHERE {$this->COL[0]}='{$this->CROSS[$line][0]}'";
 $this->run($delete);
 }
+
+function seek($SEARCH){
+    $fetch=array();
+    $fetch_avail=array();
+    $fetch_avail_id=-1;
+    for($inSEARCH=0;$inSEARCH<$this->width;$inSEARCH++){
+        if($SEARCH[$inSEARCH]!=""){
+            $fetch_avail_id++;
+            $fetch_avail[$fetch_avail_id]=$inSEARCH;
+            $fetch_id=0;
+            for($inTable=0;$inTable<$this->length;$inTable++){
+                if($this->CROSS[$inTable][$inSEARCH]==$SEARCH[$inSEARCH]){
+                    $fetch[$inSEARCH][$fetch_id++]=$inTable;
+                echo "(".$inSEARCH.",".$inTable.")\r\n";
+                }
+            }
+        }
+    }
+$seek=$fetch[$fetch_avail[$fetch_avail_id]];
+for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++){
+    $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
+}
+$seek=array_values($seek);
+$this->seek=$seek;
+$this->seeker=count($seek);
+}
+
 
 }//end class
 ?>
