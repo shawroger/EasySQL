@@ -223,3 +223,35 @@ $TEST->edit($line,$test_array);  //$line为所在行数
 ```PHP
 $TEST->delete($line);  //$line为所在行数
 ```
+
+### 5.全局排序
+
+
+利用文件包含的 **order()** 方法，我们可以快速删除一行数据，我们还需要该数据所在的行数。
+
+需要注意的是，**order()** 方法有两个参数，一个是排序的列序，还一个是排序所需的bool函数
+
+```PHP
+$TEST->order($columnId,functionName);  //$line为所在行数
+```
+
+对排序的bool函数，也需要两个参数，对应数据库中该列的不同行数的值，举例如下：
+
+如需将某一列从小到大排序：
+
+```PHP
+function functionName($temp1,$temp2) {
+    if($temp1<$temp2){
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+
+然后使用 **order()** 方法，如此则之后的二维数组 **$this->CROSS** 已经重新改写。
+
+```PHP
+$TEST->order($columnId,functionName);
+$TEST->CROSS;  //已经发生了变化
+```
