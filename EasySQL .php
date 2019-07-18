@@ -181,5 +181,17 @@ function order($ordercol,$orderfunc) {
     $this->CROSS=$newordercross;
 }
 
+public function xy($x,$y) {
+    return $this->CROSS[$x][$y];
+}
+
+public function line($id) {
+    return array_column($conn->CROSS,$id);
+}
+
+public function row($id) {
+    return $conn->CROSS[$id];
+}
+
 }//end class
 ?>
