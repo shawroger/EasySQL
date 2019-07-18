@@ -17,7 +17,7 @@ include "$ADDRESS/EasySQL.php";
 
 # 使用方法
 
-## 1.申请一个RD类的对象
+## 1.申请一个EasySQL类的对象
 ```PHP
 $TEST = new EasySQL(参数1;参数2;参数3;参数4;参数5);
 ```
