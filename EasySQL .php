@@ -157,5 +157,29 @@ function seek($SEARCH) {
     }
 }
 
+function order($ordercol,$orderfunc) {
+    $neworder=$this->LINE;
+    $tempCross=$this->CROSS;
+    $newordercross=array();
+    for($order_t1=0;$order_t1<$this->length;$order_t1++) {
+        for($order_t2=$order_t1+1;$order_t2<$this->length;$order_t2++) {
+            if($orderfunc($tempCross[$order_t1][$ordercol],$tempCross[$order_t2][$ordercol])) {
+                $temp=$tempCross[$order_t1][$ordercol];
+                $tempCross[$order_t1][$ordercol]=$tempCross[$order_t2][$ordercol];
+                $tempCross[$order_t2][$ordercol]=$temp;
+                $temp=$neworder[$order_t1];
+                $neworder[$order_t1]=$neworder[$order_t2];
+                $neworder[$order_t2]=$temp;
+            }
+        }
+    }
+    for($order_p1=0;$order_p1<$this->length;$order_p1++) {
+        for($order_p2=0;$order_p2<$this->width;$order_p2++) {
+            $newordercross[$order_p1][$order_p2]=$this->CROSS[$neworder[$order_p1]][$order_p2];
+        }
+    }
+    $this->CROSS=$newordercross;
+}
+
 }//end class
 ?>
