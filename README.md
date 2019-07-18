@@ -255,3 +255,7 @@ function functionName($temp1,$temp2) {
 $TEST->order($columnId,functionName);
 $TEST->CROSS;  //已经发生了变化
 ```
+
+**如需恢复原始数据表顺序** ，我们只需再次调用 **cross()** 方法恢复原始状态。
+
+该方法在构造时已经调用过一次，再次调用即可恢复构造初始状态。
