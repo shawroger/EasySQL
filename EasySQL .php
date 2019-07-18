@@ -186,11 +186,11 @@ public function xy($x,$y) {
 }
 
 public function line($id) {
-    return array_column($conn->CROSS,$id);
+    return array_column($this->CROSS,$id);
 }
 
 public function row($id) {
-    return $conn->CROSS[$id];
+    return $this->CROSS[$id];
 }
 
 }//end class
