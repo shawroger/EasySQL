@@ -10,7 +10,7 @@ class EasySQL
     public $LINE;
     public $ROW;
    
-function __construct($HOST,$USER,$PASS,$BASE,$TABLE){
+function __construct($HOST,$USER,$PASS,$BASE,$TABLE) {
     $this->HOST=$HOST;
     $this->USER=$USER;
     $this->PASS=$PASS;
@@ -23,33 +23,33 @@ function __construct($HOST,$USER,$PASS,$BASE,$TABLE){
     $this->size();
     $this->col();
     $this->cross();
-    for($LINE_temp=0;$LINE_temp<$this->length;$LINE_temp++){
+    for($LINE_temp=0;$LINE_temp<$this->length;$LINE_temp++) {
         $LINE[$LINE_temp]=$LINE_temp;
     }
-    for($ROW_temp=0;$ROW_temp<$this->width;$ROW_temp++){
+    for($ROW_temp=0;$ROW_temp<$this->width;$ROW_temp++) {
         $ROW[$ROW_temp]=$ROW_temp;
     }
     $this->LINE=$LINE;
     $this->ROW=$ROW;
 }
 
-function run($RUN){
+function run($RUN) {
     $DO_RUN=mysqli_query($this->CONNECT,$RUN);
 }
 
-function get($SEARCH){
+function get($SEARCH) {
     $DO_SEARCH=mysqli_query($this->CONNECT,$SEARCH);
     $GET_SEARCH=mysqli_fetch_array($DO_SEARCH, MYSQLI_ASSOC);
     $this->GET=$GET_SEARCH;
 }
     
-function eget($E_Q,$E_A){
+function eget($E_Q,$E_A) {
     $E_SEARCH="SELECT * FROM {$this->TABLE} WHERE {$E_Q} = {$E_A}";
     $this->get($E_SEARCH);
 }
 
-function size($Another_TABLE){
-    if($Another_TABLE==''){
+function size($Another_TABLE) {
+    if($Another_TABLE=='') {
         $Another_TABLE=$this->TABLE;
     }
     $STRLEN="SELECT * FROM {$Another_TABLE}";
@@ -63,15 +63,15 @@ function size($Another_TABLE){
     return $DO_STRLEN_id;
 }
 
-function cross($Another_TABLE){
-    if($Another_TABLE==''){
+function cross($Another_TABLE) {
+    if($Another_TABLE=='') {
         $Another_TABLE=$this->TABLE;
     }
     $FUNC_FOR="SELECT * FROM {$Another_TABLE}";
     $DO_FUNC_FOR=mysqli_query($this->CONNECT,$FUNC_FOR);
     $FOR_ROW=0;
-    while($GET_FUNC_FOR=mysqli_fetch_row($DO_FUNC_FOR)){
-        for($FOR_COL=0;$FOR_COL<$this->width;$FOR_COL++){
+    while($GET_FUNC_FOR=mysqli_fetch_row($DO_FUNC_FOR)) {
+        for($FOR_COL=0;$FOR_COL<$this->width;$FOR_COL++) {
             $this->CROSS[$FOR_ROW][$FOR_COL]=$GET_FUNC_FOR[$FOR_COL];
         }
         $FOR_ROW++;
@@ -99,7 +99,7 @@ $add_first="INSERT INTO {$this->TABLE}".
             "VALUES ".
             "('{$addArr[0]}')";
 $this->run($add_first);
-for($addtemp=1;$addtemp<$this->width;$addtemp++){
+for($addtemp=1;$addtemp<$this->width;$addtemp++) {
         $add_more="UPDATE {$this->TABLE} SET {$this->COL[$addtemp]}='{$addArr[$addtemp]}' WHERE {$this->COL[0]}='{$addArr[0]}'";
         $this->run($add_more);
     }
@@ -108,8 +108,8 @@ for($addtemp=1;$addtemp<$this->width;$addtemp++){
 function edit($line,$editArr) {
     $hook_edit=$this->CROSS[$line][0];
     $new_editArr=array();
-    for($edit_temp=0;$edit_temp<$this->width;$edit_temp++){
-        if($editArr[$edit_temp]==""){
+    for($edit_temp=0;$edit_temp<$this->width;$edit_temp++) {
+        if($editArr[$edit_temp]=="") {
                 $new_editArr[$edit_temp]=$this->CROSS[$line][$edit_temp];
         }
         else {
@@ -117,44 +117,44 @@ function edit($line,$editArr) {
         }
     }
     print_r($new_editArr);
-    for($edit_run_temp=0;$edit_run_temp<$this->width;$edit_run_temp++){
+    for($edit_run_temp=0;$edit_run_temp<$this->width;$edit_run_temp++) {
         $edit_more="UPDATE {$this->TABLE} SET {$this->COL[$edit_run_temp]}='{$new_editArr[$edit_run_temp]}' WHERE {$this->COL[0]}='{$hook_edit}'";
         $this->run($edit_more);
     }
 }
 
 function delete($line) {
-$delete="DELETE FROM {$this->TABLE} WHERE {$this->COL[0]}='{$this->CROSS[$line][0]}'";
-$this->run($delete);
+    $delete="DELETE FROM {$this->TABLE} WHERE {$this->COL[0]}='{$this->CROSS[$line][0]}'";
+    $this->run($delete);
 }
 
-function seek($SEARCH){
+function seek($SEARCH) {
     $fetch=array();
     $fetch_avail=array();
     $fetch_avail_id=-1;
-    for($inSEARCH=0;$inSEARCH<$this->width;$inSEARCH++){
-        if($SEARCH[$inSEARCH]!=""){
+    for($inSEARCH=0;$inSEARCH<$this->width;$inSEARCH++) {
+        if($SEARCH[$inSEARCH]!="") {
             $fetch_avail_id++;
             $fetch_avail[$fetch_avail_id]=$inSEARCH;
             $fetch_id=0;
-            for($inTable=0;$inTable<$this->length;$inTable++){
-                if($this->CROSS[$inTable][$inSEARCH]==$SEARCH[$inSEARCH]){
+            for($inTable=0;$inTable<$this->length;$inTable++) {
+                if($this->CROSS[$inTable][$inSEARCH]==$SEARCH[$inSEARCH]) {
                     $fetch[$inSEARCH][$fetch_id++]=$inTable;
                 }
             }
         }
     }
-$seek=$fetch[$fetch_avail[$fetch_avail_id]];
-for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++){
-    $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
-}
-$seek=array_values($seek);
-$this->seek=$seek;
-$this->seeker=count($seek);
-if($fetch_avail_id==-1){
-$this->seek=$this->LINE;
-$this->seeker=count($this->seek);
-}
+    $seek=$fetch[$fetch_avail[$fetch_avail_id]];
+    for($all_in_fetch=0;$all_in_fetch<$fetch_avail_id;$all_in_fetch++) {
+        $seek=array_intersect($seek,$fetch[$fetch_avail[$all_in_fetch]]);
+    }
+    $seek=array_values($seek);
+    $this->seek=$seek;
+    $this->seeker=count($seek);
+    if($fetch_avail_id==-1) {
+        $this->seek=$this->LINE;
+        $this->seeker=count($this->seek);
+    }
 }
 
 }//end class
