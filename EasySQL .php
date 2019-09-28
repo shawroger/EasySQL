@@ -116,7 +116,6 @@ function edit($line,$editArr) {
             $new_editArr[$edit_temp]=$editArr[$edit_temp];
         }
     }
-    print_r($new_editArr);
     for($edit_run_temp=0;$edit_run_temp<$this->width;$edit_run_temp++) {
         $edit_more="UPDATE {$this->TABLE} SET {$this->COL[$edit_run_temp]}='{$new_editArr[$edit_run_temp]}' WHERE {$this->COL[0]}='{$hook_edit}'";
         $this->run($edit_more);
