@@ -177,18 +177,15 @@ class EasySQL {
         $this -> CROSS = $newordercross;
     }
 
-    public
-    function xy($x, $y) {
+    public function xy($x, $y) {
         return $this -> CROSS[$x][$y];
     }
 
-    public
-    function line($id) {
+    public function line($id) {
         return array_column($this -> CROSS, $id);
     }
 
-    public
-    function row($id) {
+    public function row($id) {
         return $this -> CROSS[$id];
     }
 
